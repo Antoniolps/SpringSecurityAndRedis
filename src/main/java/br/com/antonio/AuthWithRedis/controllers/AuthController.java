@@ -3,8 +3,12 @@ package br.com.antonio.AuthWithRedis.controllers;
 import br.com.antonio.AuthWithRedis.models.Dtos.*;
 import br.com.antonio.AuthWithRedis.models.User;
 import br.com.antonio.AuthWithRedis.services.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/auth")
+@RequiredArgsConstructor
 public class AuthController {
-
-    @Autowired
-    private AuthService authService;
-
-    @Autowired
-    private UserService userService;
+    private final AuthService authService;
+    private final UserService userService;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody CreateUserDto createUserDto) {
@@ -33,11 +35,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
-        boolean isSended = authService.login(loginDto.email(), loginDto.password());
+        var usernamePassword = new UsernamePasswordAuthenticationToken(loginDto.email(), loginDto.password());
+        var auth = authenticationManager.authenticate(usernamePassword);
 
-        if(!isSended){
+        if(!auth.isAuthenticated()){
             return ResponseEntity.badRequest().body("Email ou senha inválidos");
         }
+
+        authService.login(loginDto.email());
 
         return ResponseEntity.ok("Código de verificação enviado");
     }

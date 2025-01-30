@@ -28,6 +28,8 @@ public class SecurityConfigurations {
                .authorizeHttpRequests(authorize -> authorize
                        .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                        .requestMatchers(HttpMethod.POST, "/api/auth/2af").permitAll()
+                       .requestMatchers(HttpMethod.GET, "/api/url-shortener/{shortUrl}").permitAll()
+                       .requestMatchers(HttpMethod.POST, "/api/url-shortener").permitAll()
                        .requestMatchers(HttpMethod.POST, "/api/auth/register").hasRole("ADMIN")
                        .anyRequest().authenticated()
                )

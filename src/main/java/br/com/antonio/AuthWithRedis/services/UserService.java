@@ -3,15 +3,16 @@ package br.com.antonio.AuthWithRedis.services;
 import br.com.antonio.AuthWithRedis.models.Enums.UserRole;
 import br.com.antonio.AuthWithRedis.repository.UserRepository;
 import br.com.antonio.AuthWithRedis.models.User;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
     private final BCryptPasswordEncoder passwdEncoder = new BCryptPasswordEncoder();

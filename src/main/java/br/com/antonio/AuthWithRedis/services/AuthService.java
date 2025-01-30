@@ -2,6 +2,7 @@ package br.com.antonio.AuthWithRedis.services;
 
 import br.com.antonio.AuthWithRedis.models.User;
 import br.com.antonio.AuthWithRedis.infra.security.TokenService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,35 +15,19 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
+@AllArgsConstructor
 public class AuthService implements UserDetailsService {
-    @Autowired
-    private UserService userService;
 
-    @Autowired
-    private RedisService redisService;
+    private final UserService userService;
+    private final RedisService redisService;
+    private final TokenService tokenService;
 
-    @Autowired
-    private TokenService tokenService;
-
-    @Lazy
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-
-    public boolean login(String email, String password){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(email, password);
-        var auth = authenticationManager.authenticate(usernamePassword);
-
-        if(!auth.isAuthenticated()){
-            return false;
-        }
-
+    public void login(String email){
         String code = String.format("%06d", new Random().nextInt(999999));
         redisService.saveToRedis(email, code);
 
         // TODO: Serviço de envio de email
         System.out.println("Código de verificação: " + code);// Simulando envio de email
-        return true;
     }
 
     public String verify(String email, String code){
