@@ -1,10 +1,12 @@
 package br.com.antonio.AuthWithRedis.infra.security;
 
+import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
 import br.com.antonio.AuthWithRedis.models.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +15,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
 @Service
+@AllArgsConstructor
 public class TokenService {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private final ProjectDetails projectDetails;
 
     public String generateToken(User user){
         try{
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(projectDetails.getSecret());
             String token = JWT.create()
                     .withIssuer("AuthWithRedis")
                     .withSubject(user.getEmail())
@@ -35,7 +37,7 @@ public class TokenService {
 
     public String validateToken(String token){
         try{
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(projectDetails.getSecret());
             return JWT.require(algorithm)
                     .withIssuer("AuthWithRedis")
                     .build()

@@ -1,6 +1,8 @@
 package br.com.antonio.AuthWithRedis.services;
 
+import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,7 @@ import java.util.UUID;
 public class UrlShortenerService {
 
     private final RedisService redisService;
-
-    private final String apiUrl = "http://localhost:8080/";
+    private final ProjectDetails projectDetails;
 
     public String shortenUrl(String longUrl){
         String shortUrl = generateShortUrl(longUrl);
@@ -29,6 +30,6 @@ public class UrlShortenerService {
 
         redisService.saveToRedis(uuid.toString(), longUrl);
 
-        return apiUrl + "api/url-shortener/" + uuid.toString();
+        return projectDetails.getApiUrl() + "api/url-shortener/" + uuid;
     }
 }

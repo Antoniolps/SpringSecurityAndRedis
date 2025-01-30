@@ -4,7 +4,6 @@ import br.com.antonio.AuthWithRedis.models.Dtos.ShortenUrlDto;
 import br.com.antonio.AuthWithRedis.models.Dtos.ShortenUrlResponseDto;
 import br.com.antonio.AuthWithRedis.services.UrlShortenerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class UrlShortenerController {
          }
 
          @GetMapping("/{shortUrl}")
-         public ResponseEntity<?> redirect(@PathVariable String shortUrl) {
+         public ResponseEntity<Void> redirect(@PathVariable String shortUrl) {
              String longUrl = urlShortenerService.getLongUrl(shortUrl);
 
              if(longUrl == null){
