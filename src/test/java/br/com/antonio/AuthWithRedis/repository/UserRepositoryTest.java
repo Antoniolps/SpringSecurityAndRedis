@@ -3,7 +3,6 @@ package br.com.antonio.AuthWithRedis.repository;
 import br.com.antonio.AuthWithRedis.models.Dtos.CreateUserDto;
 import br.com.antonio.AuthWithRedis.models.User;
 import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

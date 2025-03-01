@@ -4,18 +4,19 @@ import br.com.antonio.AuthWithRedis.models.Enums.UserRole;
 import br.com.antonio.AuthWithRedis.repository.UserRepository;
 import br.com.antonio.AuthWithRedis.models.User;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private final BCryptPasswordEncoder passwdEncoder = new BCryptPasswordEncoder();
+    private final BCryptPasswordEncoder passwdEncoder;
 
     public User register(String email, String name, String password, String role){
         if(userRepository.existsByEmail(email)){
@@ -36,7 +37,7 @@ public class UserService {
         return userRepository.findOptionalByEmail(email).orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
-    public UserDetails loadUserByUsername(String email) throws RuntimeException{
+    public UserDetails loadUserByUsername(String email){
         return userRepository.findByEmail(email);
     }
 }

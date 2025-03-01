@@ -1,12 +1,13 @@
 package br.com.antonio.AuthWithRedis.services;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RedisService {
 
     private final StringRedisTemplate stringRedisTemplate;

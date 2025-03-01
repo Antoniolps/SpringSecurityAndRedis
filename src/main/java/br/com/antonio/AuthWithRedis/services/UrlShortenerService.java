@@ -3,13 +3,14 @@ package br.com.antonio.AuthWithRedis.services;
 import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UrlShortenerService {
 
     private final RedisService redisService;

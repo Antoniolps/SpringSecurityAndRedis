@@ -3,6 +3,7 @@ package br.com.antonio.AuthWithRedis.services;
 import br.com.antonio.AuthWithRedis.models.User;
 import br.com.antonio.AuthWithRedis.infra.security.TokenService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
 
     private final UserService userService;
