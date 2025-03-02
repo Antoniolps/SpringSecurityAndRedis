@@ -17,20 +17,23 @@ public class UrlShortenerService {
     private final ProjectDetails projectDetails;
 
     public String shortenUrl(String longUrl){
-        String shortUrl = generateShortUrl(longUrl);
-        redisService.saveToRedis(shortUrl, longUrl);
-        return shortUrl;
-    }
-
-    public String getLongUrl(String shortUrl){
-        return redisService.getFromRedis(shortUrl);
-    }
-
-    private String generateShortUrl(String longUrl){
         UUID uuid = UUID.randomUUID();
 
         redisService.saveToRedis(uuid.toString(), longUrl);
 
-        return projectDetails.getApiUrl() + "api/url-shortener/" + uuid;
+        return projectDetails.getApiUrl() + "/api/url-shortener/" + uuid;
     }
+
+    public String getLongUrl(String shortUrl){
+        String uuid = shortUrl.substring(shortUrl.lastIndexOf("/") + 1);
+
+        String originalUrl = redisService.getFromRedis(uuid);
+
+        if(originalUrl == null){
+            throw new RuntimeException("URL not found");
+        }
+
+        return originalUrl;
+    }
+
 }
