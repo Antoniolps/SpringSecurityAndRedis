@@ -1,19 +1,20 @@
 package br.com.antonio.AuthWithRedis.services;
 
 import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ExtendWith(MockitoExtension.class)
 class UrlShortenerServiceTest {
 
     @Mock
@@ -25,10 +26,6 @@ class UrlShortenerServiceTest {
     @InjectMocks
     private UrlShortenerService urlShortenerService;
 
-    @BeforeEach
-    void setup(){
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     @DisplayName("Should shorten url successfully")
