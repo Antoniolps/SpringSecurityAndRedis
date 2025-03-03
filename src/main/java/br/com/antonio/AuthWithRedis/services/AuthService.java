@@ -35,15 +35,13 @@ public class AuthService implements UserDetailsService {
         String storedCode = redisService.getFromRedis(email);
 
         if(storedCode == null || !storedCode.equals(code)){
-            return null;
+            throw new RuntimeException("Código inválido!");
         }
 
         redisService.delete(email);
         User user = userService.findByEmail(email);
-        String accessToken = tokenService.generateToken(user);
 
-
-        return accessToken;
+        return tokenService.generateToken(user);
     }
 
     @Override
