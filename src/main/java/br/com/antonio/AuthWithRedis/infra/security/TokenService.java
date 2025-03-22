@@ -1,6 +1,6 @@
 package br.com.antonio.AuthWithRedis.infra.security;
 
-import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
+import br.com.antonio.AuthWithRedis.config.ProjectDetails;
 import br.com.antonio.AuthWithRedis.models.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

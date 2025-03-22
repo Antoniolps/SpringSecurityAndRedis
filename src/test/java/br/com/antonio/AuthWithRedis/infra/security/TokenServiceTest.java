@@ -1,6 +1,6 @@
 package br.com.antonio.AuthWithRedis.infra.security;
 
-import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
+import br.com.antonio.AuthWithRedis.config.ProjectDetails;
 import br.com.antonio.AuthWithRedis.models.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

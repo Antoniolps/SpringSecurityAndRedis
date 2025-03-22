@@ -1,6 +1,6 @@
 package br.com.antonio.AuthWithRedis.services;
 
-import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
+import br.com.antonio.AuthWithRedis.config.ProjectDetails;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

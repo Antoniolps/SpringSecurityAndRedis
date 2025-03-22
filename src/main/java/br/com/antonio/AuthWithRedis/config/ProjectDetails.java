@@ -1,10 +1,10 @@
-package br.com.antonio.AuthWithRedis.infra;
+package br.com.antonio.AuthWithRedis.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
 
-@Service
+@Configuration
 @Getter
 public class ProjectDetails {
 

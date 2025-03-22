@@ -1,10 +1,7 @@
 package br.com.antonio.AuthWithRedis.services;
 
-import br.com.antonio.AuthWithRedis.infra.ProjectDetails;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import br.com.antonio.AuthWithRedis.config.ProjectDetails;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
